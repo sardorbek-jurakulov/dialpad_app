@@ -42,13 +42,31 @@ class _MyDialpadState extends State<MyDialpad> {
 
     return SafeArea(
       child: Scaffold(
-        body: Column(
+        body: ListView(
           children: [
             Container(
+              margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 35),
               child: Column(
                 children: [
-                  Text(insertedChars),
-                  const Text("Add Number"),
+                  Text(
+                    insertedChars,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Add Number",
+                    style: TextStyle(
+                      color: Color(0xFF0d8bf2),
+                      fontSize: 14,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -91,7 +109,12 @@ class _MyDialpadState extends State<MyDialpad> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {});
+                          setState(() {
+                            if (insertedChars.length > 0) {
+                              insertedChars = insertedChars.substring(
+                                  0, insertedChars.length - 1);
+                            }
+                          });
                         },
                         child: Icon(Icons.add),
                       ),
