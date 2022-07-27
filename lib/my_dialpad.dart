@@ -16,10 +16,6 @@ class _MyDialpadState extends State<MyDialpad> {
     Widget createDealpadButton(String buttonNumber,
         [String buttonLetters = ""]) {
       return Container(
-        // decoration: const BoxDecoration(
-        //   shape: BoxShape.circle,
-        //   color: Color(0xFFEEEEEE),
-        // ),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: Color(0xFFe9e9e9),
@@ -146,22 +142,30 @@ class _MyDialpadState extends State<MyDialpad> {
                       ],
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         ElevatedButton(
                           onPressed: _callNumber,
-                          child: Icon(Icons.phone),
+                          child: Icon(Icons.phone, size: 32),
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF94cf82),
+                            shape: CircleBorder(),
+                            shadowColor: Colors.transparent,
+                            padding: EdgeInsets.all(15),
+                          ),
                         ),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(),
                           onPressed: () {
                             setState(() {
-                              if (insertedChars.length > 0) {
+                              if (insertedChars.isNotEmpty) {
                                 insertedChars = insertedChars.substring(
                                     0, insertedChars.length - 1);
                               }
                             });
                           },
-                          child: Icon(Icons.add),
+                          child:
+                              const Icon(Icons.clear, color: Color(0xFF020202)),
                         ),
                       ],
                     ),
