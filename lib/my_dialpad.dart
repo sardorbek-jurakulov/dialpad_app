@@ -50,7 +50,7 @@ class _MyDialpadState extends State<MyDialpad> {
                 children: [
                   Text(
                     insertedChars,
-                    maxLines: 1,
+                    // maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.left,
                     style: const TextStyle(
@@ -60,11 +60,15 @@ class _MyDialpadState extends State<MyDialpad> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    "Add Number",
-                    style: TextStyle(
-                      color: Color(0xFF0d8bf2),
-                      fontSize: 14,
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Add Number",
+                      style: TextStyle(
+                        color: Color(0xFF0b7dda),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ],
