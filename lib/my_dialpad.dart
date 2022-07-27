@@ -10,6 +10,7 @@ class MyDialpad extends StatefulWidget {
 
 class _MyDialpadState extends State<MyDialpad> {
   String insertedChars = "";
+  double _visibilityStatus = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class _MyDialpadState extends State<MyDialpad> {
             onPressed: () {
               setState(() {
                 insertedChars = insertedChars + buttonNumber;
+                _visibilityStatus = 1.0;
               });
             },
             child: Column(
@@ -59,34 +61,33 @@ class _MyDialpadState extends State<MyDialpad> {
 
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          // margin:
-          // const EdgeInsets.only(left: 50, top: 80, right: 50, bottom: 80),
-          child: ListView(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 50,
-                  top: 100,
-                  right: 50,
-                  bottom: 40,
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      insertedChars,
-                      // maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                          fontSize: 30,
-                          color: Color(0xFF020202),
-                          fontWeight: FontWeight.w400),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextButton(
+        body: ListView(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(
+                left: 50,
+                top: 90,
+                right: 50,
+                bottom: 30,
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    insertedChars,
+                    // maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                        fontSize: 30,
+                        color: Color(0xFF020202),
+                        fontWeight: FontWeight.w400),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Opacity(
+                    opacity: _visibilityStatus,
+                    child: TextButton(
                       onPressed: () {},
                       child: const Text(
                         "Add Number",
@@ -97,83 +98,103 @@ class _MyDialpadState extends State<MyDialpad> {
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 50,
-                  top: 40,
-                  right: 50,
-                  bottom: 100,
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        createDealpadButton("1"),
-                        createDealpadButton("2", "ABC"),
-                        createDealpadButton("3", "DEF"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        createDealpadButton("4", "GHI"),
-                        createDealpadButton("5", "JKL"),
-                        createDealpadButton("6", "MNO"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        createDealpadButton("7", "PQRS"),
-                        createDealpadButton("8", "TUV"),
-                        createDealpadButton("9", "WXYZ"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        createDealpadButton("*"),
-                        createDealpadButton("0", "+"),
-                        createDealpadButton("#"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          onPressed: _callNumber,
-                          child: Icon(Icons.phone, size: 32),
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xFF94cf82),
-                            shape: CircleBorder(),
-                            shadowColor: Colors.transparent,
-                            padding: EdgeInsets.all(15),
-                          ),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(),
-                          onPressed: () {
-                            setState(() {
-                              if (insertedChars.isNotEmpty) {
-                                insertedChars = insertedChars.substring(
-                                    0, insertedChars.length - 1);
-                              }
-                            });
-                          },
-                          child:
-                              const Icon(Icons.clear, color: Color(0xFF020202)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(
+                left: 50,
+                top: 30,
+                right: 50,
+                bottom: 900,
               ),
-            ],
-          ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      createDealpadButton("1"),
+                      createDealpadButton("2", "ABC"),
+                      createDealpadButton("3", "DEF"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      createDealpadButton("4", "GHI"),
+                      createDealpadButton("5", "JKL"),
+                      createDealpadButton("6", "MNO"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      createDealpadButton("7", "PQRS"),
+                      createDealpadButton("8", "TUV"),
+                      createDealpadButton("9", "WXYZ"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      createDealpadButton("*"),
+                      createDealpadButton("0", "+"),
+                      createDealpadButton("#"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const SizedBox(
+                        width: 65,
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: _callNumber,
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFF94cf82),
+                          shape: const CircleBorder(),
+                          shadowColor: Colors.transparent,
+                          padding: const EdgeInsets.all(15),
+                        ),
+                        child: const Icon(Icons.phone, size: 32),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shadowColor: Colors.transparent,
+                          primary: Colors.transparent,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            if (insertedChars.isNotEmpty) {
+                              insertedChars = insertedChars.substring(
+                                  0, insertedChars.length - 1);
+                            }
+                            if (insertedChars.isEmpty) {
+                              _visibilityStatus = 0.0;
+                            }
+                          });
+                        },
+                        child: Stack(
+                          children: <Widget>[
+                            Icon(
+                              Icons.backspace,
+                              color: Color(0xFFe9e9e9),
+                            ),
+                            Icon(
+                              Icons.clear,
+                              color: Color(0xFF020202),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
