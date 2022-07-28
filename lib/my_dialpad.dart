@@ -177,10 +177,12 @@ class _MyDialpadState extends State<MyDialpad> {
                           });
                         },
                         child: Stack(
+                          alignment: AlignmentDirectional.center,
                           children: <Widget>[
                             Icon(
                               Icons.backspace,
                               color: Color(0xFFe9e9e9),
+                              size: 35,
                             ),
                             Icon(
                               Icons.clear,
